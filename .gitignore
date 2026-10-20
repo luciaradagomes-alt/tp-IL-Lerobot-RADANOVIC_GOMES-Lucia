@@ -1,0 +1,14 @@
+# Données et résultats produits pendant le TP (trop lourds pour Git)
+donnees/
+outputs/
+
+# Modèles de la partie 5, téléchargés par scripts/recuperer_modeles.py (trop lourds pour Git)
+modeles/diffusion_pusht_keypoints/
+modeles/act_pusht_keypoints_200k/
+
+# Fichiers temporaires de Python et des systèmes
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
+.ipynb_checkpoints/
