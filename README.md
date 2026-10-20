@@ -68,8 +68,8 @@ L'épisode est **réussi** quand le T recouvre au moins **95 %** de la zone vert
 - l'**action** est la position (x, y) **visée** par l'agent : l'agent se déplace vers ce point
   (quand vous jouez, c'est la position de votre souris).
 
-> **Pourquoi des positions et pas des images ?** En réalité, un robot verrait la scène avec une caméra.
-> Mais entraîner un réseau sur des images demande un GPU (une carte graphique puissante) et des heures de calcul.
+> **Pourquoi des positions et pas des images ?** En règle générale, pour obtenir les meilleures résultats avec les méthodes SOTA, un robot recevrait les observations de la scène sous forme d'images RGB.
+> Mais entraîner un réseau sur des images demande un GPU et des heures de calcul.
 > Pour que le TP tienne sur un simple ordinateur portable, la politique reçoit directement les positions exactes des
 > objets, comme si un système parfait de suivi d'objets les lui donnait. Les principes de l'apprentissage par
 > imitation restent exactement les mêmes.
@@ -99,7 +99,7 @@ Un mot sur le vocabulaire (au cas où, on sait jamais...):
 ### 0.1 Créer un compte GitHub
 
 Si vous n'en avez pas, créez un compte gratuit sur [github.com](https://github.com/signup). Il servira à me rendre
-votre rapport.
+votre rapport (normalement c'est déjà fait depuis le premier TP).
 
 ### 0.2 Installer Git et Miniforge
 
@@ -154,7 +154,7 @@ Pour savoir quelle puce vous avez : menu Pomme  > *À propos de ce Mac* (ligne �
 ### 0.3 Récupérer le TP
 
 Dans le terminal (Miniforge Prompt sous Windows), placez-vous dans le dossier où vous voulez travailler, puis
-**clonez** le dépôt (c'est-à-dire : téléchargez-en une copie suivie par Git) :
+**clonez** le dépôt :
 
 ```bash
 git clone https://github.com/quentinRolld/tp-IL-Lerobot.git
@@ -240,7 +240,7 @@ pip install "lerobot[pusht,training,diffusion]==0.6.1" matplotlib
 ### 0.5 Télécharger les modèles de la partie 5
 
 La partie 5 compare deux politiques pré-entraînées qui pèsent au total un peu plus de 1 Go : téléchargez-les
-**avant la séance**, pour ne pas saturer le réseau le jour du TP.
+**avant la séance**.
 
 ```bash
 python scripts/recuperer_modeles.py
@@ -538,8 +538,7 @@ L'évaluation prend 1 à 2 minutes. Elle affiche puis enregistre dans `outputs/e
 > d'épisodes ayant atteint au moins 80 % de recouvrement (donné par le script `tableau_resultats.py`, partie 4).
 
 Les positions de départ des 50 épisodes sont tirées avec une **graine aléatoire** fixe (un nombre qui détermine
-la suite de tirages « au hasard ») : tous les modèles évalués avec cette commande affrontent exactement les mêmes
-50 situations, ce qui rend la comparaison équitable.
+la suite de tirages « au hasard ») : tous les modèles évalués avec cette commande rencontrent exactement les mêmes 50 situations, ce qui rend la comparaison équitable (c'est hyper important).
 
 Les vidéos des 10 premiers épisodes sont dans `outputs/eval/act_mes_demos/videos/pusht_0/`. Pour en mettre une dans
 votre rapport, convertissez-la en GIF animé (GitHub affiche les GIF directement dans un fichier Markdown) :
@@ -548,7 +547,7 @@ votre rapport, convertissez-la en GIF animé (GitHub affiche les GIF directement
 python scripts/video_vers_gif.py outputs/eval/act_mes_demos/videos/pusht_0/eval_episode_0.mp4 rapport/images/mon_modele.gif
 ```
 
-Regardez enfin votre politique jouer en direct :
+Regardez enfin votre politique interagir en direct :
 
 ```bash
 python scripts/tester_politique.py --politique outputs/train/act_mes_demos/checkpoints/last/pretrained_model
@@ -558,7 +557,7 @@ La croix rouge montre le point visé par l'action en cours. `Espace` passe à l'
 `Échap` quitte.
 
 **Q10.** Donnez le taux de réussite et le score moyen de votre politique. Insérez un GIF d'un épisode réussi
-(ou à défaut, d'un épisode raté) et décrivez le comportement de la politique : imite-t-elle votre façon de jouer ?
+(ou à défaut, d'un épisode raté) et décrivez le comportement de la politique : imite-t-elle votre façon d'agir ?
 
 **Q11.** (Facultatif, si vous avez le temps.) Évaluez aussi le checkpoint `001000` (remplacez `last` par `001000`
 dans `--policy.path`, et changez `--output_dir`). Le modèle s'améliore-t-il entre 1000 et 5000 itérations ?
@@ -695,9 +694,7 @@ $$
 \qquad z \sim q_\phi(z \mid A, o)
 $$
 
-où $\|\cdot\|_1$ est la somme des valeurs absolues (le terme `l1_loss`), $D_{\text{KL}}$ la divergence de
-Kullback-Leibler (le terme `kld_loss`), $\mathcal{N}(0, I)$ la loi normale centrée réduite, choisie comme **loi a
-priori** de $z$, et $\beta = 10$ un coefficient de pondération. À l'utilisation, l'expert n'est plus là pour
+où $\|\cdot\|_1$ est la somme des valeurs absolues (le terme `l1_loss`), $D_{\text{KL}}$ la divergence de Kullback-Leibler (le terme `kld_loss`), $\mathcal{N}(0, I)$ la loi normale centrée réduite, choisie comme **loi a priori** de $z$, et $\beta = 10$ un coefficient de pondération. À l'utilisation, l'expert n'est plus là pour
 fournir $A$ : on fixe $z$ à la moyenne de la loi a priori, $z = 0$, et la politique renvoie
 $\hat{A} = f_\theta(o, 0)$.
 
