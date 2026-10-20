@@ -717,7 +717,7 @@ $$
 \qquad z \sim q_\phi(z \mid A, o)
 $$
 
-where $\|\cdot\|_1$ is the sum of absolute values (the `l1_loss` term), $D_{\text{KL}}$ the Kullback-Leibler
+where $\Vert\cdot\Vert_1$ is the sum of absolute values (the `l1_loss` term), $D_{\text{KL}}$ the Kullback-Leibler
 divergence (the `kld_loss` term), $\mathcal{N}(0, I)$ the standard normal distribution, chosen as the **prior** of
 $z$, and $\beta = 10$ a weighting coefficient. At inference time, the expert is no longer there to provide $A$: $z$ is
 set to the mean of the prior, $z = 0$, and the policy returns $\hat{A} = f_\theta(o, 0)$.

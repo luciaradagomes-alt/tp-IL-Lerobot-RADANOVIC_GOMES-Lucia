@@ -694,7 +694,7 @@ $$
 \qquad z \sim q_\phi(z \mid A, o)
 $$
 
-où $\|\cdot\|_1$ est la somme des valeurs absolues (le terme `l1_loss`), $D_{\text{KL}}$ la divergence de Kullback-Leibler (le terme `kld_loss`), $\mathcal{N}(0, I)$ la loi normale centrée réduite, choisie comme **loi a priori** de $z$, et $\beta = 10$ un coefficient de pondération. À l'utilisation, l'expert n'est plus là pour
+où $\Vert\cdot\Vert_1$ est la somme des valeurs absolues (le terme `l1_loss`), $D_{\text{KL}}$ la divergence de Kullback-Leibler (le terme `kld_loss`), $\mathcal{N}(0, I)$ la loi normale centrée réduite, choisie comme **loi a priori** de $z$, et $\beta = 10$ un coefficient de pondération. À l'utilisation, l'expert n'est plus là pour
 fournir $A$ : on fixe $z$ à la moyenne de la loi a priori, $z = 0$, et la politique renvoie
 $\hat{A} = f_\theta(o, 0)$.
 
@@ -714,7 +714,7 @@ $$
 \mathcal{L}_{\text{DP}}(\theta) = \mathbb{E}_{(o, A),\, k,\, \varepsilon}\Big[ \big\| \varepsilon - \varepsilon_\theta(A^k, k, o) \big\|_2^2 \Big]
 $$
 
-À l'utilisation, on **tire** $A^K \sim \mathcal{N}(0, I)$, puis on applique itérativement un pas de débruitage
+À l'inférence, on **tire** $A^K \sim \mathcal{N}(0, I)$, puis on applique itérativement un pas de débruitage
 $A^{k-1} = g\big(A^k, \varepsilon_\theta(A^k, k, o)\big)$ jusqu'à obtenir $A^0$, le chunk d'actions exécuté. Ici, la
 règle d'échantillonnage DDIM ([Song et al., 2021](https://arxiv.org/abs/2010.02502)) permet de n'effectuer que
 **10 pas de débruitage** au lieu de 100. Chaque pas nécessite une évaluation complète du réseau.
@@ -807,15 +807,10 @@ modes la prédiction d'ACT suit-elle ?
 politiques. Le caractère aléatoire de Diffusion Policy constitue-t-il un défaut ? Relancez ensuite le script depuis
 plusieurs situations initiales de votre choix (option `--etat-initial`, même format qu'en partie 4.4). Les
 prédictions de Diffusion Policy présentent-elles systématiquement plusieurs modes ?
-Enfin, sur 200 situations initiales tirées au hasard, j'ai mesuré que l'avantage de Diffusion Policy sur ACT est
-du même ordre dans les situations où elle prédit plusieurs modes (62 % de réussite pour ACT contre 82 %) et dans
-les autres (53 % contre 78 %). La multimodalité suffit-elle à expliquer l'écart de performance mesuré en 5.3 ?
-Quelles autres différences entre les deux politiques (section 5.2) pourraient y contribuer, et quelle expérience
-permettrait de départager ces hypothèses ?
+Enfin, sur 200 situations initiales tirées au hasard, l'avantage de Diffusion Policy sur ACT est du même ordre dans les situations où elle prédit plusieurs modes (62 % de réussite pour ACT contre 82 %) et dans les autres (53 % contre 78 %). La multimodalité suffit-elle à expliquer l'écart de performance mesuré en 5.3 ?
+Quelles autres différences entre les deux politiques (section 5.2) pourraient y contribuer, et quelle expérience permettrait de départager ces hypothèses ?
 
-**Q22.** Conclusion : en vous appuyant sur l'ensemble du TP, résumez en 5 à 10 lignes ce que l'apprentissage par
-imitation fait bien, ses principales limites, et ce que le choix de la classe de politique peut (ou ne peut pas)
-corriger, en mobilisant la notion de multimodalité.
+**Q22.** Conclusion : en vous appuyant sur l'ensemble du TP, résumez en 5 à 10 lignes ce que l'apprentissage par imitation fait bien, ses principales limites, et ce que le choix de la classe de politique peut (ou ne peut pas) corriger, en mobilisant la notion de multimodalité.
 
 ---
 
