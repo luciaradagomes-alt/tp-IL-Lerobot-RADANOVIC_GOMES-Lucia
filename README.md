@@ -80,6 +80,7 @@ L'épisode est **réussi** quand le T recouvre au moins **95 %** de la zone vert
 
 > ⚠️ **À faire avant la séance.** Comptez 45 min à 1 h et environ 3 Go d'espace disque. Il faut une connexion
 > internet. Si vous êtes bloqué(e), vous pouvez ouvrir une issue sur git, ou vraiment au pire m'envoyer un mail (quentin.rolland2@cea.fr) **avant** la séance.
+> Contact supplémentaire : Silvia Tulli – tulli@isir.upmc.fr – GitHub [`Silviatulli`](https://github.com/Silviatulli).
 
 Ces instructions suivent la [documentation officielle d'installation de LeRobot](https://huggingface.co/docs/lerobot/installation),
 adaptée à nos besoins (simulation uniquement, sans GPU). Le TP a été préparé avec **LeRobot 0.6.1** et
@@ -876,8 +877,8 @@ Les dossiers `donnees/` et `outputs/` (démonstrations, modèles, vidéos) sont 
 
 ### Étape 4 – M'inviter sur votre dépôt
 
-Sur la page de votre dépôt GitHub : **Settings** > **Collaborators** > **Add people**, et ajoutez le compte
-**`quentinRolld`**.
+Sur la page de votre dépôt GitHub : **Settings** > **Collaborators** > **Add people**, et ajoutez les comptes
+**`quentinRolld`** et **`Silviatulli`**.
 
 Vérifiez sur la page GitHub de votre dépôt que le fichier `rapport/RAPPORT.md` s'affiche correctement, avec ses
 images. **La version prise en compte est la dernière envoyée avant la date limite indiquée en cours.**

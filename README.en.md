@@ -93,6 +93,7 @@ At each time step (10 times per second):
 > ⚠️ **To do before the session.** Allow 45 min to 1 h and about 3 GB of disk space. You need an internet
 > connection. If you are stuck, you can open an issue on GitHub, or as a last resort send me an email
 > (quentin.rolland2@cea.fr) **before** the session.
+> Additional contact: Silvia Tulli – tulli@isir.upmc.fr – GitHub [`Silviatulli`](https://github.com/Silviatulli).
 
 These instructions follow the [official LeRobot installation guide](https://huggingface.co/docs/lerobot/installation),
 adapted to our needs (simulation only, no GPU). The lab was prepared with **LeRobot 0.6.1** and **Python 3.12**: use
@@ -900,8 +901,8 @@ The `donnees/` and `outputs/` folders (demonstrations, models, videos) are delib
 
 ### Step 4 – Invite me to your repository
 
-On your GitHub repository page: **Settings** > **Collaborators** > **Add people**, and add the account
-**`quentinRolld`**.
+On your GitHub repository page: **Settings** > **Collaborators** > **Add people**, and add the accounts
+**`quentinRolld`** and **`Silviatulli`**.
 
 Check on the GitHub page of your repository that the `rapport/RAPPORT.md` file is displayed correctly, with its
 images. **The version taken into account is the last one pushed before the deadline given in class.**
