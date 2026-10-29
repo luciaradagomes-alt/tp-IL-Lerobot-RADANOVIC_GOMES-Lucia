@@ -196,7 +196,7 @@ Pour l'ACT, réaliser un chunk d'actions ne demande qu'une seule évaluation du 
 
 ### Q18
 
-![Prédictions des deux politiques](images/comparaison/predictions.png)
+![Prédictions des deux politiques](images/comparaison/predictions_0.png)
 
 Pour l'ACT, on remarque 1 seule trajectoire qui rejoint le T, alors que pour la Diffusion Policy il y en a plusieurs. 
 
@@ -225,7 +225,7 @@ En effet, à chaque observation $o$, le prédicteur déterministe associe un uni
 
 ### Q21
 
-![Épisodes des deux politiques](images/comparaison/episodes.png)
+![Épisodes des deux politiques](images/comparaison/episodes_0.png)
 
 Le caractère aléatoire de Diffusion Policy est à la fois un avantage et un défaut. En effet, il peut amener l'agent à réaliser des actions qui ne sont pas partie d'une stratégie pour réaliser la tâche; cependant, il permet aussi de tester différents modes pour en trouver un optimal. Étant donné le nombre de possibilités d'action pour chaque observation, il me semble que le caractère aléatoire de Diffusion Policy est plutôt un avantage, même si il peut amener à des erreurs parfois.
 
@@ -237,4 +237,4 @@ Les deux modèles diffèrent également sur le nombre d'observations qui les con
 
 ### Q22 – Conclusion
 
-L'apprentissage par  imitation est un modèle d'entraînement de ré
+L'apprentissage par imitation est un une approche d'apprentissage qui se base sur des démonstrations de l'accomplissement de la tâche désirée par un expert pour entraîner un modèle. Si la politique entraînée recontre une situation semblable à celle des démonstrations, elle sait alors comment agir pour se rapprocher de l'objectif, puisqu'elle se base sur des démonstrations réussies d'experts. Toutefois, cette approche présente des limites; notamment, le fait que les démonstrations ne peuvent pas strictement recouvrir toutes les situations rencontrées. Dès que la situation sort des situations rencontrées lors de l'entraînement, la politique entraînée est moins performante. Le choix de politique peut aider à réduire cette limite. En effet, en introduisant un caractère aléatoire, la politique peut trouver plusieurs modes de trajectoires pour chaque observation, la permettant alors d'explorer plusieurs solutions pour le problème posé: la multimodalité permet alors de trouver des trajectoires optimales, qui ne sont pas nécessairement identiques à ce qui est vu en entraînement.
