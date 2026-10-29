@@ -157,6 +157,7 @@ On remarque une grande amélioration du taux de recouvrement $\geq$ 80%, qui est
 
 
 Toutefois, même le meilleur modèle montre un taux de réussite assez faible (seulement 6%). Il faudrait peut-être modifier la technique d'entraînement du modèle: l'imitation ne semble pas suffisante pour cette tâche. En effet, elle a certaines limitations: elle ne montre pas ce qui ne doit pas être fait, et ne recouvre pas toutes les situations possibles.
+
 ### Q13
 
 Mon modèle est meilleur que le modèle entraîné sur le dataset de référence pour 20 demos: en effet, les deux ont le même socre moyen, et le mien a des taux de recouvrement $\geq$ 80% et de réussite supérieurs.
@@ -205,13 +206,14 @@ En revanche, la Diffusion Policy part d'un bruit $A^K$ tiré au hasard dans une 
 
 ### Q19
 
-On
+On peut distinguer 5 modes dans les prédictions de Diffusion Policy, avec le 5e (plus à droite) ayant la majorité des prédictions.
  
 - Les modes le plus à gauche (2 trajectoires à gauche), touchant la base du T, ne représentent pas des stratégies admissibles pour amener le T sur la cible: en effet, ils semblent l'éloigner encore plus. 
 - Il est difficile à dire si le mode du milieu réalise une trajectoire qui accomplira la tâche: il semble que celui-ci peut éloigner le T, mais il semble se corriger assez vite, et réaliser des actions cohérentes avec son but. 
 - Les modes les plus à droite représentent des stratégies qui amènereont certainement le T à la cible, avec celui le plus à droite, qui touche le coin du T (avec le plus de prédictions) le plus optimal.
 
 La prédiction d'ACT semble suivre le 4e mode: il touche la partie supérieure du T, mais vers le coin gauche supérieur, pour en réaliser la rotation. 
+
 ### Q20
 
 
