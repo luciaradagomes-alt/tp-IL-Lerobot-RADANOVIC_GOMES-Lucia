@@ -4,7 +4,7 @@
 
 **Système d'exploitation et processeur :** Windows 11, Intel Core i5 
 
-**Durée de l'entraînement de la partie 3 sur votre machine :** ... minutes
+**Durée de l'entraînement de la partie 3 sur votre machine :** 43 minutes
 
 <!--
 Ceci est un commentaire Markdown : il n'apparaît pas quand GitHub affiche le fichier.
@@ -107,7 +107,7 @@ L'avantage de réaliser plusieurs actions "les yeux fermés" est qu'on évite un
 
 Une perte très faible ne signifie pas que la politique réussit la tâche, mais seulement qu'elle s'y rapproche.
 
-```kld_loss``` mesure à quel point la variable latente s'écarte d'une loi normale. Ainsi, si elle se rapproche de 0, cela indique que la variable latente se rapproche et finit par se confondre avec une loi normale. 
+```kld_loss``` mesure à quel point la variable latente s'écarte d'une loi normale. Ainsi, si elle se rapproche de 0, cela indique que la variable latente se rapproche et finit par se confondre avec une loi normale. Concrètement, cela indique que la variable latente n'est pas utilisée pour encoder le "style" des démonstrations: le réseau s'appuie donc peu sur celui-ci pour créer sa politique. 
 
 ### Q10
 
@@ -216,17 +216,25 @@ La prédiction d'ACT semble suivre le 4e mode: il touche la partie supérieure d
 
 ### Q20
 
+1.  Un prédicteur déterministe $f$ ne peut reproduire qu'un mode (la moitié) de $p_E(A|o)$: $A_{DROITE}$ ou $A_{GAUCHE}$.
+En effet, à chaque observation $o$, le prédicteur déterministe associe un unique chunk $f(o)$: depuis une même situation, la politique aura toujours le même comportement.
 
-<!-- Les formules s'écrivent entre $...$ (dans le texte) ou entre $$...$$ (sur une ligne à part), en LaTeX. -->
+2. La variable latente $z$ du CVAE encode le style de la démonstrations: ainsi, elle pourrait encoder le comportement de la loi $p_E(A|o)$. Comme vu précédemment, ```kld_loss```se rapproche de 0, indiquant que la variable latente se rapproche de la loi normale. Ainsi, elle ne code plus le style des démonstrations: la politique commence à se baser plus sur l'observation, et non sur le style de l'expert. En fixant $z=0$, on prend la valeur moyenne de cette variable $z$: ainsi, pour une observation $o$, où le comportement de l'agent pourrait dépendre du style encodé par $z$, on en prend la valeur moyenne toujours - le prédicteur devient déterministe. On peut en déduire que $z$ ne transmet pas d'information sur le style au décodeur (vu qu'elle est fixe).
 
-1. 
-
-2. 
-
-3. 
+3. La Diffusion Policy commence avec un tirage de $A_K$ sur une loi normale. Ainsi, à chaque fois qu'on évalue le réseau, on aura une condition initiale différente, ce qui introduit un terme aléatoire dans ce modèle. Il est alors possible de représenter différents modes, surtout si la probabilité de chacun est similaire comme dans cet exemple ($\frac{1}{2}$).
 
 ### Q21
 
 ![Épisodes des deux politiques](images/comparaison/episodes.png)
 
+Le caractère aléatoire de Diffusion Policy est à la fois un avantage et un défaut. En effet, il peut amener l'agent à réaliser des actions qui ne sont pas partie d'une stratégie pour réaliser la tâche; cependant, il permet aussi de tester différents modes pour en trouver un optimal. Étant donné le nombre de possibilités d'action pour chaque observation, il me semble que le caractère aléatoire de Diffusion Policy est plutôt un avantage, même si il peut amener à des erreurs parfois.
+
+Non, les prédictions de Diffusion Policy ne présentent pas systématiquement plusieurs modes: parfois, il n'y a qu'un seul comportement cohérent avec l'observation.
+
+On observe un avantage de la Diffusion Policy sur l'ACT du même ordre qu'il y ait de la multimodalité ou pas: ce caractère multimodal seul n'explique pas l'écart de performance mesuré (5.3). 
+
+Les deux modèles diffèrent également sur le nombre d'observations qui les conditionnent (2 pour la DP, 1 pour l'ACT), le taux d'apprentissage (constant pour l'ACT, décroissant pour la DP), et le nombre de paramètres (6 fois supérieur pour la DP). Tous ces paramètres peuvent avoir un impact sur la politique apprise: pour pouvoir les comparer, on devrait réaliser des expériences en fixant tous les paramètres au même, sauf 1 (e.g. la Diffusion Policy prend un taux d'apprentissage constant et ne se base que sur la dernière observation $o_t$, comme l'ACT, mais le nombre de paramètres continue différent).
+
 ### Q22 – Conclusion
+
+L'apprentissage par  imitation est un modèle d'entraînement de ré
